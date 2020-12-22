@@ -11,7 +11,7 @@ public class Main {
         //new pet(1, "Dog1", "Russian", "Mud-White");
         //pet brudo = new pet(2, "Dog2", "Golden retriever", "Light Brown");
         //pet mithu = new pet(4, "Parrot1", "Macaw", "red,blue & yellow");
-       // pet billi = new pet(3, "Cat1", "Persian", "perl white");
+       pet billi = new pet(3, "Cat1", "Persian", "perl white");
 
 
         doublyLinkedList.insertAtFirst(new pet(2, "Dog2", "Golden retriever", "Light Brown"));
