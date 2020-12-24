@@ -15,7 +15,7 @@ public class cart {
     public void push(int id) {
         pointer++;
         items[pointer] = id;
-    }
+    } 
 
     public int pop() {
         int temp = pointer;

@@ -1,7 +1,7 @@
 package DoublyLinkedListDS;
 
 public class pet {
-    String name;
+  //  String name;
     int id;
     String type;
     String breed;

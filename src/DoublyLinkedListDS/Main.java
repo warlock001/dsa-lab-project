@@ -1,5 +1,11 @@
 package DoublyLinkedListDS;
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileWriter;
+
+import static java.nio.file.Files.write;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -9,16 +15,28 @@ public class Main {
         DoublyLinkedList doublyLinkedList = DoublyLinkedList.getInstance();
         cart cart = new cart(10);
         Scanner sc = new Scanner(System.in);
+        try {
+            File myObj = new File("Pet Data.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        }catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         //new pet(1, "Dog1", "Russian", "Mud-White");
         //pet brudo = new pet(2, "Dog2", "Golden retriever", "Light Brown");
         //pet mithu = new pet(4, "Parrot1", "Macaw", "red,blue & yellow");
        //pet billi = new pet(3, "Cat1", "Persian", "perl white");
 
-
-        doublyLinkedList.insertAtFirst(new pet(2, "Dog2", "Golden retriever", "Light Brown"));
-        doublyLinkedList.insertAtFirst(new pet(1, "Dog1", "Russian", "Mud-White"));
+/*
+        doublyLinkedList.insertAtFirst(new pet(2, "asma", "nabeel", "kala"));
+        doublyLinkedList.insertAtFirst(new pet(1, "Dog1", "Russian", "Mud-White"));*/
         doublyLinkedList.insertAtLast(new pet(3, "Cat1", "Persian", "perl white"));
-        doublyLinkedList.insertAfter(3, new pet(4, "Parrot1", "Macaw", "red,blue & yellow"));
+        //doublyLinkedList.insertAfter(3, new pet(4, "Parrot1", "Macaw", "red,blue & yellow"));
+
         System.out.println("************************\nWELCOME TO THE PET SHOP\n************************");
         do {
         System.out.println("Select any option and press Enter Key...\n1.  MART\n2.  YOUR CART\n3.  CHECK OUT\n4.  ADD NEW PET\n5.  Delete pet from data\n6.  EXIT");
@@ -26,7 +44,9 @@ public class Main {
         switch (option) {
             case 1 -> {
                 System.out.println("Pet List..");
-                doublyLinkedList.printForward();
+                //doublyLinkedList.printForward();
+                ReadFile readFile=new ReadFile();
+                readFile.ReadFile();
                 System.out.println("Select id and press enter key");
                 id = sc.nextInt();
                 cart.push(id);
@@ -67,12 +87,26 @@ public class Main {
             case  4 ->{
 
                 System.out.println("Enter Type");
-                String type = sc.next();
+                sc.nextLine();
+                String type = sc.nextLine();
+                //sc.nextLine();
                 System.out.println("Breed");
-                String breed = sc.next();
+                String breed = sc.nextLine();
                 System.out.println("Enter Color");
-                String color = sc.next();
+                String color = sc.nextLine();
                 doublyLinkedList.insertAtLast(new pet(doublyLinkedList.last.data.id+1,type,breed,color));
+               //write.file(new pet(doublyLinkedList.last.data.id+1,type,breed,color));
+               try{
+                FileWriter myWriter = new FileWriter("Pet Data.txt",true);
+                   myWriter.write(String.valueOf(new pet(doublyLinkedList.last.data.id+1,type,breed,color)));
+                myWriter.close();
+               } catch (IOException e) {
+                   System.out.println("An error occurred.");
+                   e.printStackTrace();
+               }
+
+
+
                 //cart.push(doublyLinkedList.last.data.id+1);
             }
             case 5->{
