@@ -1,5 +1,6 @@
 package DoublyLinkedListDS;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -26,6 +27,7 @@ public class Main {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
         //new pet(1, "Dog1", "Russian", "Mud-White");
         //pet brudo = new pet(2, "Dog2", "Golden retriever", "Light Brown");
         //pet mithu = new pet(4, "Parrot1", "Macaw", "red,blue & yellow");
@@ -45,8 +47,21 @@ public class Main {
             case 1 -> {
                 System.out.println("Pet List..");
                 //doublyLinkedList.printForward();
-                ReadFile readFile=new ReadFile();
-                readFile.ReadFile();
+               // ReadFile readFile=new ReadFile();
+                //ReadFile Read = new ReadFile();
+               // doublyLinkedList.insertAtLast(readFile.ReadFile());
+                try {
+                    File myObj = new File("Pet Data.txt");
+                    Scanner myReader = new Scanner(myObj);
+                    while (myReader.hasNextLine()) {
+                        pet pet1 = myReader.nextLine();
+                        doublyLinkedList.insertAtLast(myReader.next());
+                    }
+                    myReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
                 System.out.println("Select id and press enter key");
                 id = sc.nextInt();
                 cart.push(id);
@@ -98,7 +113,7 @@ public class Main {
                //write.file(new pet(doublyLinkedList.last.data.id+1,type,breed,color));
                try{
                 FileWriter myWriter = new FileWriter("Pet Data.txt",true);
-                   myWriter.write(String.valueOf(new pet(doublyLinkedList.last.data.id+1,type,breed,color)));
+                   myWriter.write(String.valueOf(new  pet(doublyLinkedList.last.data.id+1,type,breed,color)));
                 myWriter.close();
                } catch (IOException e) {
                    System.out.println("An error occurred.");
